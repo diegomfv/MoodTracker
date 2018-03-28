@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.moodtracker.Data.DatabaseHelper;
 import com.example.android.moodtracker.R;
+import com.example.android.moodtracker.database.DatabaseHelper;
 
 /**
  * Created by Diego Fajardo on 27/01/2018.
@@ -18,10 +18,7 @@ import com.example.android.moodtracker.R;
 
 /** AlertDialogCreator is used to create an alert dialog when the user taps the custom_note_button
  * in any of the layouts that display face buttons */
-class AlertDialogCreator {
-
-    //Constructor
-    AlertDialogCreator() { }
+public class AlertDialogCreator {
 
     //METHOD USED TO CREATE THE ALERT DIALOG when the button is tapped
     public void createAlertDialog (final Context context, final DatabaseHelper dbH) {
