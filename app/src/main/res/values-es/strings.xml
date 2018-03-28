@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- GENERAL STRINGS -->
+    <string name="app_name">MoodTracker</string>
+    <string name="mood_history_button">Mood History Button</string>
+    <string name="custom_note_button">Custom Note Button</string>
+    <string name="smiley_face_button">Smiley Face Button</string>
+    <string name="smiley_happy_face_button" />
+    <string name="smiley_disappointed_face_button" />
+    <string name="smiley_normal_face_button" />
+    <string name="smiley_sad_face_button" />
+    <string name="smiley_super_happy_face_button" />
+
+    <!-- ALERT DIALOG BOX -->
+    <string name="alert_dialog_box_title">Title of Alert Dialog</string>
+    <string name="alert_dialog_box_text">Text of Alert Dialog</string>
+    <string name="alert_dialog_box_ok">AÑADIR</string>
+    <string name="alert_dialog_box_cancel">CANCELAR</string>
+    <string name="comment_hint">¡Escribe aquí!</string>
+    <string name="alertDialogTitle">¡AÑADE UN COMENTARIO!</string>
+
+    <!-- ALERT DIALOG ONCLICK BUTTONS -->
+    <string name="quotation_marks">"\""</string>
+    <string name="has_been_saved">"\""\ "se ha salvado</string>
+    <string name="fill_empty_space">Por favor, introduce un comentario</string>
+    <string name="no_string_added">No se añadió ningún comentario</string>
+
+    <!-- ONCLICK FACES' TOASTS -->
+    <string name="day_set_superhappy">Felicidad del día cambiada a SÚPER FELIZ :)) !!</string>
+    <string name="day_set_happy">Felicidad del día cambiada a FELIZ :)</string>
+    <string name="day_set_normal">Felicidad del día cambiada a NORMAL</string>
+    <string name="day_set_disappointed">Felicidad del día cambiada a DECEPCIONADO :(</string>
+    <string name="day_set_sad">Felicidad del día cambiada a TRISTE :(( …</string>
+
+    <!-- ONCLICK HISTORY BUTTON TOAST -->
+    <string name="mood_history_toast">MOOD HISTORY</string>
+
+</resources>
