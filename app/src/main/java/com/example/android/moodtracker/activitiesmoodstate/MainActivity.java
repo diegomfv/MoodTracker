@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.moodtracker.R;
+import com.example.android.moodtracker.activitiesrest.MoodHistory;
 import com.example.android.moodtracker.broadcastreceiver.BroadcastDataUpdate;
 import com.example.android.moodtracker.database.DatabaseContract;
 import com.example.android.moodtracker.database.DatabaseHelper;
@@ -125,36 +126,14 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void createAlarm () {
+    //BACK BUTTON
 
-        //CREATION OF A CALENDAR to get time in millis and pass it to the AlarmManager to set
-        //the time when the alarm has to start working (same day the app runs for the first time
-        //at midnight).
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-
-        //DECLARATION OF the AlarmManager and
-        // the Intent and PendingIntent necessary for the AlarmManager.setRepeating method.
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, BroadcastDataUpdate.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-
-        //timeInMillis: specifies when we have to start the alarm (calendar gives this information).
-        //INTERVAL_DAY: makes the alarm be repeated every day.
-
-        if (alarmManager != null) {
-            alarmManager.setInexactRepeating(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.getTimeInMillis(),
-                    AlarmManager.INTERVAL_DAY,
-                    pendingIntent);
-        }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        MainActivity.this.overridePendingTransition(R.anim.fade_in,
+                R.anim.fade_out);
     }
-
 
     @Override
     public boolean onDown(MotionEvent e) {
@@ -197,4 +176,36 @@ public class MainActivity extends AppCompatActivity
         }
         return true;
     }
+
+
+    private void createAlarm () {
+
+        //CREATION OF A CALENDAR to get time in millis and pass it to the AlarmManager to set
+        //the time when the alarm has to start working (same day the app runs for the first time
+        //at midnight).
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+
+        //DECLARATION OF the AlarmManager and
+        // the Intent and PendingIntent necessary for the AlarmManager.setRepeating method.
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, BroadcastDataUpdate.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+        //timeInMillis: specifies when we have to start the alarm (calendar gives this information).
+        //INTERVAL_DAY: makes the alarm be repeated every day.
+
+        if (alarmManager != null) {
+            alarmManager.setInexactRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(),
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent);
+        }
+
+    }
+
 }

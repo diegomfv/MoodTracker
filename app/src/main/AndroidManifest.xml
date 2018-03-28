@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activitiesmoodstate.NormalSmiley" />
+        <activity android:name=".activitiesmoodstate.SuperHappySmiley" />
+        <activity android:name=".activitiesmoodstate.DisappointedSmiley" />
+        <activity android:name=".activitiesmoodstate.SadSmiley" />
         <activity android:name=".activitiesrest.MoodHistory" />
         <receiver android:name=".broadcastreceiver.BroadcastDataUpdate"
             android:enabled="true"
