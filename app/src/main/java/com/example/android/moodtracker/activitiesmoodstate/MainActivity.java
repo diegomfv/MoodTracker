@@ -1,4 +1,4 @@
-package com.example.android.moodtracker.activities;
+package com.example.android.moodtracker.activitiesmoodstate;
 
 import android.animation.Animator;
 import android.app.AlarmManager;
@@ -60,9 +60,7 @@ public class MainActivity extends AppCompatActivity
             for (int i = 0; i < DatabaseValues.days.length; i++){
                 dbH.insertFirstDataDays(DatabaseValues.days[i],6,"");
             }
-
-            // TODO: 27/03/2018 Put the alarm here for repeating event (updating info in database)
-
+            createAlarm();
         }
 
         if (dbH.isTableEmpty(DatabaseContract.Database.STATES_TABLE_NAME)) {
