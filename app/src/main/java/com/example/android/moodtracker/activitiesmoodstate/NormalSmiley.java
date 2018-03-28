@@ -24,39 +24,26 @@ import com.example.android.moodtracker.R;
  * Created by Diego Fajardo on 13/01/2018.
  */
 
-/** NormalSmiley activity class --> Displays Normal Face;  activity_smiley_normal layout */
 public class NormalSmiley extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
-    //GESTURE DETECTOR VARIABLE
+    /** To see comments about variables and methods, see MainActivity */
+
     GestureDetectorCompat mGestureDetector;
 
-    //BUTTONS
     ImageButton image_button_normal_face;
     ImageButton image_button_history;
     ImageButton image_button_add_note;
 
-    //DATABASE HELPER
     DatabaseHelper dbH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smiley_normal);
-        setTitle((R.string.app_name)); //Title displayed in the action bar !!!! Change in other activities!
 
-        //Database Helper
         dbH = new DatabaseHelper(this);
 
-        //GESTURES
-        //Parameters:
-        //1.App's context
-        //2. Invoked for callbacks
         this.mGestureDetector = new GestureDetectorCompat(this, this);
-
-
-        //ONCLICK LISTENERS
-
-        //FACE BUTTON
 
         image_button_normal_face = findViewById(R.id.normal_face_button);
         image_button_normal_face.setOnClickListener(new View.OnClickListener() {
@@ -64,34 +51,25 @@ public class NormalSmiley extends AppCompatActivity implements GestureDetector.O
             @Override
             public void onClick(View v) {
 
-                //CODE FOR FADING WHEN PRESSING THE BUTTON
-
-                // get the center for the clipping circle
                 int cx = (image_button_normal_face.getLeft() + image_button_normal_face.getRight()) / 2;
                 int cy = (image_button_normal_face.getTop() + image_button_normal_face.getBottom()) / 2;
 
-                // get the final radius for the clipping circle
                 int dx = Math.max(cx, image_button_normal_face.getWidth() - cx);
                 int dy = Math.max(cy, image_button_normal_face.getHeight() - cy);
                 float finalRadius = (float) Math.hypot(dx, dy);
 
-                // Android native animator
                 Animator animator =
                         ViewAnimationUtils.createCircularReveal(image_button_normal_face, cx, cy, 0, finalRadius);
                 animator.setInterpolator(new AccelerateDecelerateInterpolator());
                 animator.setDuration(500);
                 animator.start();
 
-                //Used for feedback to the user
                 Toast.makeText(NormalSmiley.this, getString(R.string.day_set_normal), Toast.LENGTH_SHORT).show();
 
-                //UPDATES the state of the day
                 dbH.updateDataDaysStateInToday(3);
 
             }
         });
-
-        //MOOD HISTORY BUTTON
 
         image_button_history = findViewById(R.id.mood_history_button_normal);
         image_button_history.setOnClickListener(new View.OnClickListener() {
@@ -102,8 +80,6 @@ public class NormalSmiley extends AppCompatActivity implements GestureDetector.O
                 startActivity(intent);
             }
         });
-
-        //ADDING COMMENTS BUTTON
 
         image_button_add_note = findViewById(R.id.custom_note_button_normal);
         image_button_add_note.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +92,6 @@ public class NormalSmiley extends AppCompatActivity implements GestureDetector.O
         });
     }
 
-    //BACK BUTTON
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -125,12 +99,9 @@ public class NormalSmiley extends AppCompatActivity implements GestureDetector.O
                 R.anim.fade_out);
     }
 
-    //CODE FOR MANAGING TOUCH EVENTS
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return this.mGestureDetector.onTouchEvent(event);
-        //return super.onTouchEvent(event);
     }
 
     @Override

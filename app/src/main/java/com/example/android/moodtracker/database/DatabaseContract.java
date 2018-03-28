@@ -7,11 +7,13 @@ import android.provider.BaseColumns;
  */
 
 
-/** DatabaseContract stores the following information related to the database:
- *  tables names
- *  columns names
- *  */
+
 public class DatabaseContract {
+
+    /** DatabaseContract stores the following information related to the database:
+     *  tables names
+     *  columns names
+     *  */
 
     private DatabaseContract(){
     }

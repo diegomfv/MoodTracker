@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Button;
 
-import com.example.android.moodtracker.activitiesmoodstate.MainActivity;
 import com.example.android.moodtracker.database.DatabaseContract;
 import com.example.android.moodtracker.database.DatabaseHelper;
 import com.example.android.moodtracker.R;
@@ -31,6 +30,9 @@ import java.util.List;
  */
 
 public class PieChartActivity extends AppCompatActivity{
+
+    /** PieChartActivity displays the data
+     * of days table in a Pie Chart*/
 
     private PieChart pieChart;
 
@@ -54,6 +56,7 @@ public class PieChartActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pie_chart_layout);
+        setTitle("Mood Pie Chart");
 
         dbH = new DatabaseHelper(this);
         mCursor = dbH.getAllDataFromDaysTable();
@@ -159,6 +162,13 @@ public class PieChartActivity extends AppCompatActivity{
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        PieChartActivity.this.overridePendingTransition(R.anim.fade_in,
+                R.anim.fade_out);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
@@ -169,6 +179,9 @@ public class PieChartActivity extends AppCompatActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /** Changes the format the data
+     *  is displayed in the PieChart */
 
     public class MyValueFormatter implements IValueFormatter {
 

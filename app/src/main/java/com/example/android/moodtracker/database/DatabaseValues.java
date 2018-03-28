@@ -5,13 +5,17 @@ package com.example.android.moodtracker.database;
  */
 
 
-/** DATABASEVALUES class has the information
- * that will be used to fill the database:
- * days table,
- * states table */
+
 public class DatabaseValues {
 
-    //Different days that will be displayed in the Recycler View
+    /** DATABASEVALUES class has the information
+     * that will be used to fill the database:
+     * days table,
+     * states table */
+
+    /** Different days that will be
+     * displayed in the Recycler View
+     * */
     public static String [] days = {
             "Today",
             "Yesterday",
@@ -31,8 +35,10 @@ public class DatabaseValues {
             "15 days ago"
     };
 
-    //Possible states for each day. The number next to the state is the id used in the
-    //states table to store each state
+    /** Possible states for each day.
+     * The number next to the state is the id used in the
+    states table to store each state
+     */
     public static String [] states = {
             "Sad", //1
             "Disappointed", //2

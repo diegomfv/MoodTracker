@@ -14,7 +14,7 @@
         android:padding="6dp">
 
         <TextView
-            android:id="@+id/tv_list_item_2"
+            android:id="@+id/tv_list_item"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
@@ -22,7 +22,7 @@
             tools:text="#42" />
 
         <ImageButton
-            android:id="@+id/read_note_button_2"
+            android:id="@+id/read_note_button"
             android:src="@drawable/ic_comment_black_48px"
             android:background="@android:color/transparent"
             android:layout_gravity="right|center_vertical"

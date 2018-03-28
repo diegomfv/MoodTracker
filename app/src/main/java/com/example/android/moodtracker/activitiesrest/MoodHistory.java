@@ -23,14 +23,19 @@ import com.example.android.moodtracker.adapters.RvAdapter;
  * Created by Diego Fajardo on 13/01/2018.
  */
 
-/** Mood History class --> Used to set the adapter and display the RecyclerView */
+
 public class MoodHistory extends AppCompatActivity {
 
+    /** Mood History class is used to show the information of the database.
+     * It displays it in a recyclerView */
+
+    /**
+     * RecyclerView variables
+     * */
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
 
-    //DATABASE VARIABLES
     DatabaseHelper dbH;
     Cursor mCursor;
 
@@ -38,7 +43,11 @@ public class MoodHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood_history);
+        setTitle("Mood History");
 
+        /**
+         * Sets the back arrow icon in the top bar
+         * */
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
@@ -49,7 +58,9 @@ public class MoodHistory extends AppCompatActivity {
 
         mCursor = dbH.getAllDataFromDaysTable();
 
-        // TODO: 15/03/2018 Reduce size of the text
+        /** We get a reference to the recyclerView, set that the size won't change
+         * and set its layout. Then, we set the adapter that it will use
+         * */
 
         myRecyclerView = (RecyclerView) findViewById(R.id.rv_mood_history);
         myRecyclerView.setHasFixedSize(true);
@@ -61,8 +72,6 @@ public class MoodHistory extends AppCompatActivity {
         myRecyclerView.setAdapter(myAdapter);
     }
 
-    //BACK BUTTON
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -70,22 +79,31 @@ public class MoodHistory extends AppCompatActivity {
                 R.anim.fade_out);
     }
 
+    /** Used to inflate the menu in the top bar
+     * */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mood_history_menu, menu);
         return true;
     }
 
+    /** Used to respond to click events on the top menu
+     *  */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
             case android.R.id.home:
                 startActivity(new Intent(MoodHistory.this, MainActivity.class));
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
                 break;
+
             case R.id.see_pie_chart:
 
+                /** If there is no data in days table, the user can't go to
+                 * PieChartActivity
+                 * */
                 if (returnTrueIfThereIsStateDataInDaysTable()){
                     startActivity(new Intent(MoodHistory.this, PieChartActivity.class));
                     overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
@@ -97,13 +115,19 @@ public class MoodHistory extends AppCompatActivity {
                             .show();
                 }
                 break;
+
             case R.id.delete_comment_history:
+
+                /** Button used to delete the mood history */
                 alertDialogDeleteHistory();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /** Creates an alert dialog to tell the user if truly wants to delete the complete
+     * mood history
+     * */
     private void alertDialogDeleteHistory () {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MoodHistory.this);
@@ -138,6 +162,10 @@ public class MoodHistory extends AppCompatActivity {
         dialog.show();
     }
 
+    /** Returns true if the days table is empty
+     * (all state_id in all rows = 6, which means "no mood")
+     * It's used to prevent the user from going to the Pie Chart Activity
+     * if there is no data in the table */
     private boolean returnTrueIfThereIsStateDataInDaysTable () {
 
         int counter = 0;

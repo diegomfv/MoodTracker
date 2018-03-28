@@ -15,9 +15,10 @@ import java.util.ArrayList;
  * Created by Diego Fajardo on 16/01/2018.
  */
 
-
-/** DatabaseHelper is used for creating and modifying the database */
 public class DatabaseHelper extends SQLiteOpenHelper {
+
+    /** DatabaseHelper is used for
+     * creating and modifying the database */
 
     //Logcat
     private static final String LOG = "DatabaseHelper";

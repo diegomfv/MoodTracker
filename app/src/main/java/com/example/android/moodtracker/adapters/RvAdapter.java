@@ -23,24 +23,21 @@ import com.example.android.moodtracker.R;
 
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
 
-    //Cursor that will store information
-    private Cursor mCursor;
-
-    //Context
-    private Context mContext;
-
-    //Variable that allows to control the Adapter using "logs" (used in onBindViewHolder method)
+    //Logs
     private static final String TAG = RvAdapter.class.getSimpleName();
 
-    /** Constructor of the Adapter */
+    private Cursor mCursor;
+    private Context mContext;
 
+    /** Constructor of the Adapter
+     *  */
     public RvAdapter(Context context, Cursor cursor) {
         this.mContext = context;
         mCursor = cursor;
     }
 
-    /** Function that is called every time a new viewholder is created */
-
+    /** Creation of the ViewHolders of the recyclerView
+     *  */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
@@ -48,21 +45,13 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
-        //Each ROW of the RecyclerView
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        MyViewHolder viewHolder = new MyViewHolder(view);
 
-        //Code to modify each viewHolder.
-
-        // I probably have to set the text of each view here, instead of getting them before
-        // (basically, as the color).
-
-        return viewHolder;
+        return new MyViewHolder(view);
     }
 
-    /** Function that allows to introduce text in each viewHolder.
-     * Uses bind method (inside MyViewHolder class) */
-
+    /** Manipulation of each view in each viewHolder
+     *  */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) { //bind == encuadernar
 
@@ -136,20 +125,20 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
             } break;
         }
 
-        //SETTING THE TEXT OF VIEW HOLDER
-
+        /** Setting the text of the textView
+         * */
         String day = mCursor.getString(mCursor.getColumnIndex(DatabaseContract.Database.DAY));
         holder.daysTextView.setText(day);
 
 
-        //SETTING THE IMAGE BUTTON OF VIEW HOLDER
-
+        /** Setting the comment button if needed
+         *  */
         final String comment = mCursor.getString(mCursor.getColumnIndex(DatabaseContract.Database.COMMENT));
 
         if (comment == null) {} //Do nothing
         else {
-            if (comment.isEmpty()) {
-                holder.noteButton.setVisibility(View.INVISIBLE); //if string is empty, true
+            if (comment.isEmpty()) { //if string is empty, true
+                holder.noteButton.setVisibility(View.INVISIBLE);
                 holder.noteButton.setOnClickListener(null);
             }
             else {
@@ -170,7 +159,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
         return mCursor.getCount();
     }
 
-
+    /** ViewHolder class.
+     * It will have all views that will be shown
+     * */
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public final TextView daysTextView;
@@ -182,9 +173,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
         public MyViewHolder(View view) {
             super(view);
 
-            daysTextView = view.findViewById(R.id.tv_list_item_2);
+            daysTextView = view.findViewById(R.id.tv_list_item);
 
-            noteButton = view.findViewById(R.id.read_note_button_2);
+            noteButton = view.findViewById(R.id.read_note_button);
             noteButton.setVisibility(View.INVISIBLE);
 
             left_bar = view.findViewById(R.id.left_bar);

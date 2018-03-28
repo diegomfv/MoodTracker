@@ -16,21 +16,26 @@ import com.example.android.moodtracker.database.DatabaseHelper;
  * Created by Diego Fajardo on 27/01/2018.
  */
 
-/** AlertDialogCreator is used to create an alert dialog when the user taps the custom_note_button
- * in any of the layouts that display face buttons */
+
 public class AlertDialogCreator {
+
+    /** AlertDialogCreator is used to create an alert dialog
+     * when the user taps the custom_note_button
+     * in any of the layouts that display face buttons */
 
     //METHOD USED TO CREATE THE ALERT DIALOG when the button is tapped
     public void createAlertDialog (final Context context, final DatabaseHelper dbH) {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
 
-        //This way, we get a reference to alert_dialog layout INSIDE the activity
+        /** Getting a reference to the alert dialog inside the activity
+         * */
         LayoutInflater inflater = LayoutInflater.from(context);
         View mView = inflater.inflate(R.layout.alert_dialog_comment, null);
         //Displays alert_dialog_comment layout
 
-        //Creating the references to each view.
+        /**Creating the references to each view
+         * */
         TextView alertDialogTitle = (TextView) mView.findViewById(R.id.alertDialogTitle);
         final EditText alertDialogComment = (EditText) mView.findViewById(R.id.alertDialogComment);
         Button alertDialogButtonOK = (Button) mView.findViewById(R.id.alertDialogBoxOK);
@@ -39,12 +44,14 @@ public class AlertDialogCreator {
         //in the Activity, which does not exist (and you'll get an exception).That is why you call
         //mView and then findViewById.
 
-        //SHOWING the Alert Dialog
+        /** SHOWING the Alert Dialog
+         *  */
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         dialog.show();
 
-        //SETTING WHAT OK BUTTON DOES
+        /** SETTING WHAT OK BUTTON DOES
+         * */
         alertDialogButtonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +72,8 @@ public class AlertDialogCreator {
             }
         });
 
-        //SETTING WHAT CANCEL BUTTON DOES
+        /** SETTING WHAT CANCEL BUTTON DOES
+         *  */
         alertDialogButtonCANCEL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

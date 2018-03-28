@@ -24,35 +24,26 @@ import com.example.android.moodtracker.R;
  * Created by Diego Fajardo on 13/01/2018.
  */
 
-/** SadSmiley activity class --> Displays Sad Face;  activity_smiley_sad layout */
 public class SadSmiley extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
-    //GESTURE DETECTOR VARIABLE
+    /** To see comments about variables and methods, see MainActivity */
+
     GestureDetectorCompat mGestureDetector;
 
-    //BUTTONS
     ImageButton image_button_sad_face;
     ImageButton image_button_history;
     ImageButton image_button_add_note;
 
-    //DATABASE HELPER
     DatabaseHelper dbH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smiley_sad);
-        setTitle((R.string.app_name)); //Title displayed in the action bar !!!! Change in other activities!
 
-        //Database Helper
         dbH = new DatabaseHelper(this);
 
-        //GESTURES
-        //Parameters: 1.App's context
-        //2. Invoked for callbacks
         this.mGestureDetector = new GestureDetectorCompat(this, this);
-
-        //ONCLICK LISTENERS
 
         image_button_sad_face = findViewById(R.id.sad_face_button);
         image_button_sad_face.setOnClickListener(new View.OnClickListener() {
@@ -60,34 +51,25 @@ public class SadSmiley extends AppCompatActivity implements GestureDetector.OnGe
             @Override
             public void onClick(View v) {
 
-                //CODE FOR FADING WHEN PRESSING THE BUTTON
-
-                // get the center for the clipping circle
                 int cx = (image_button_sad_face.getLeft() + image_button_sad_face.getRight()) / 2;
                 int cy = (image_button_sad_face.getTop() + image_button_sad_face.getBottom()) / 2;
 
-                // get the final radius for the clipping circle
                 int dx = Math.max(cx, image_button_sad_face.getWidth() - cx);
                 int dy = Math.max(cy, image_button_sad_face.getHeight() - cy);
                 float finalRadius = (float) Math.hypot(dx, dy);
 
-                // Android native animator
                 Animator animator =
                         ViewAnimationUtils.createCircularReveal(image_button_sad_face, cx, cy, 0, finalRadius);
                 animator.setInterpolator(new AccelerateDecelerateInterpolator());
                 animator.setDuration(500);
                 animator.start();
 
-                //Used for feedback to the user
                 Toast.makeText(SadSmiley.this, getString(R.string.day_set_sad), Toast.LENGTH_SHORT).show();
 
-                //UPDATES the state of the day
                 dbH.updateDataDaysStateInToday(1);
 
             }
         });
-
-        //MOOD HISTORY BUTTON
 
         image_button_history = findViewById(R.id.mood_history_button_sad);
         image_button_history.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +80,6 @@ public class SadSmiley extends AppCompatActivity implements GestureDetector.OnGe
                 startActivity(intent);
             }
         });
-
-        //ADDING COMMENTS BUTTON
 
         image_button_add_note = findViewById(R.id.custom_note_button_sad);
         image_button_add_note.setOnClickListener(new View.OnClickListener() {
@@ -121,8 +101,6 @@ public class SadSmiley extends AppCompatActivity implements GestureDetector.OnGe
         SadSmiley.this.overridePendingTransition(R.anim.fade_in,
                 R.anim.fade_out);
     }
-
-    //CODE FOR MANAGING TOUCH EVENTS
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
