@@ -1,3 +1,40 @@
 <resources>
-    <string name="app_name">MoodTracker</string>
+    <!-- GENERAL STRINGS -->
+    <string name="app_name">Mood Tracker</string>
+    <string name="mood_history_button">Mood History Button</string>
+    <string name="custom_note_button">Custom Note Button</string>
+    <string name="smiley_face_button">Smiley Face Button</string>
+    <string name="smiley_happy_face_button" />
+    <string name="smiley_disappointed_face_button" />
+    <string name="smiley_normal_face_button" />
+    <string name="smiley_sad_face_button" />
+    <string name="smiley_super_happy_face_button" />
+
+    <!-- ALERT DIALOG BOX -->
+    <string name="alert_dialog_box_title">Title of Alert Dialog</string>
+    <string name="alert_dialog_box_text">Text of Alert Dialog</string>
+    <string name="alert_dialog_box_ok">SUBMIT</string>
+    <string name="alert_dialog_box_cancel">CANCEL</string>
+    <string name="comment_hint">Write here!</string>
+    <string name="alertDialogTitle">ADD A COMMENT!</string>
+
+    <!-- ALERT DIALOG ONCLICK BUTTONS -->
+    <string name="quotation_marks">"\""</string>
+    <string name="has_been_saved">"\""\ "has been saved</string>
+    <string name="fill_empty_space">Please, fill the empty space</string>
+    <string name="no_string_added">No comment was saved</string>
+
+    <!-- ONCLICK FACES' TOASTS -->
+    <string name="day_set_superhappy">Day state set to SUPER HAPPY :)) !!</string>
+    <string name="day_set_happy">Day state set to HAPPY :)</string>
+    <string name="day_set_normal">Day state set to NORMAL</string>
+    <string name="day_set_disappointed">Day state set to DISAPPOINTED :(</string>
+    <string name="day_set_sad">Day state set to SAD… :((</string>
+
+    <!-- ONCLICK HISTORY BUTTON TOAST -->
+    <string name="mood_history_toast">MOOD HISTORY</string>
+
+
+
+
 </resources>
