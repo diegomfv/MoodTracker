@@ -147,7 +147,7 @@ public class PieChartActivity extends AppCompatActivity{
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
 
-        PieDataSet dataSet = new PieDataSet(yValues, "MOODS");
+        PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(6f);
         dataSet.setSelectionShift(1f);
         dataSet.setColors(COLORS);
