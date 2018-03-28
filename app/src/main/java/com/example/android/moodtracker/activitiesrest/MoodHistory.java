@@ -104,7 +104,7 @@ public class MoodHistory extends AppCompatActivity {
                 /** If there is no data in days table, the user can't go to
                  * PieChartActivity
                  * */
-                if (returnTrueIfThereIsStateDataInDaysTable()){
+                if (returnTrueIfThereIsStateDataInDaysTable(mCursor)){
                     startActivity(new Intent(MoodHistory.this, PieChartActivity.class));
                     overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
                 }
@@ -166,7 +166,7 @@ public class MoodHistory extends AppCompatActivity {
      * (all state_id in all rows = 6, which means "no mood")
      * It's used to prevent the user from going to the Pie Chart Activity
      * if there is no data in the table */
-    private boolean returnTrueIfThereIsStateDataInDaysTable () {
+    public boolean returnTrueIfThereIsStateDataInDaysTable (Cursor mCursor) {
 
         int counter = 0;
         mCursor.moveToFirst();
