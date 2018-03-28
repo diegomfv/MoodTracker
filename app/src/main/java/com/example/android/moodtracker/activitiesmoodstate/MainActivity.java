@@ -217,7 +217,5 @@ public class MainActivity extends AppCompatActivity
                     AlarmManager.INTERVAL_DAY,
                     pendingIntent);
         }
-
     }
-
 }
