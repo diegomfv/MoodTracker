@@ -31,15 +31,15 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity
         implements GestureDetector.OnGestureListener {
 
-    //GESTURE DETECTOR VARIABLE
+    //Variable for gesture detector
     GestureDetectorCompat mGestureDetector;
 
-    //BUTTONS
+    //Variables for buttons
     ImageButton image_button_happy_face;
     ImageButton image_button_history;
     ImageButton image_button_add_note;
 
-    //DATABASE HELPER
+    //Variable for database helper. Used for creating the database the first time
     DatabaseHelper dbH;
 
     @Override
@@ -50,17 +50,21 @@ public class MainActivity extends AppCompatActivity
         //Database Helper
         dbH = new DatabaseHelper(this);
 
-        //GESTURES
-        //Parameters: 1.App's context
-        //2. Invoked for callbacks
+        //Gesture detector
         this.mGestureDetector = new GestureDetectorCompat(this, this);
 
-        //CODE FOR CREATING THE DATABASE (FIRST TIME) and
-        // for RUNNING THE SERVICE (only first time also) --> ALARM MANAGER
+        /**
+         * This code is used for creating the two tables of the database.
+         * It will only run the first time the app is launched
+         */
         if (dbH.isTableEmpty(DatabaseContract.Database.DAYS_TABLE_NAME)) {
             for (int i = 0; i < DatabaseValues.days.length; i++){
                 dbH.insertFirstDataDays(DatabaseValues.days[i],6,"");
             }
+            Toast.makeText(MainActivity.this,
+                    getResources().getString(R.string.toast_swipe_to_change),
+                    Toast.LENGTH_LONG)
+                    .show();
             createAlarm();
         }
 
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        /** Button Listeners
+         *  */
         image_button_happy_face = (ImageButton) findViewById(R.id.happy_face_button);
         image_button_happy_face.setOnClickListener(new View.OnClickListener() {
 
@@ -78,8 +84,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                //CODE FOR FADING WHEN PRESSING
-
+                /** This code is used for generating a fade effect when the image button
+                 * is clicked
+                 * */
                 // get the center for the clipping circle
                 int cx = (image_button_happy_face.getLeft() + image_button_happy_face.getRight()) / 2;
                 int cy = (image_button_happy_face.getTop() + image_button_happy_face.getBottom()) / 2;
@@ -105,8 +112,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //MOOD HISTORY BUTTON
-
+        /** Tapping the mood history button will take the used to that activity
+         * */
         image_button_history = findViewById(R.id.mood_history_button_main);
         image_button_history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,8 +126,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //ADDING COMMENTS BUTTON
-
+        /** Tapping the add_note button will create a dialog for the user to
+         * introduce a comment
+         * */
         image_button_add_note = findViewById(R.id.custom_note_button_main);
         image_button_add_note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,8 +141,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    //BACK BUTTON
-
+    /** When back button is pressed, there is a fade effect while returning to the
+     * previous actitivity
+     * */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -142,13 +151,16 @@ public class MainActivity extends AppCompatActivity
                 R.anim.fade_out);
     }
 
-    //CODE FOR MANAGING TOUCH EVENTS
+    /** Allows to manage touch events
+     *  */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return this.mGestureDetector.onTouchEvent(event);
         //return super.onTouchEvent(event);
     }
 
+    /** Depending on the type of swipe
+     * the user will go to one activity or another */
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         if (e1.getX() - e2.getX() > 200) //to differentiate from a tap
@@ -191,6 +203,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /** This method creates an alarm used to update
+     * the information every day at midnight. It calls
+     * a broadcast receiver*/
     private void createAlarm () {
 
         //CREATION OF A CALENDAR to get time in millis and pass it to the AlarmManager to set

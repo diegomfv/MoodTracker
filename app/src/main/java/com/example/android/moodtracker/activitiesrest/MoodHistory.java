@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.android.moodtracker.activitiesmoodstate.MainActivity;
+import com.example.android.moodtracker.database.DatabaseContract;
 import com.example.android.moodtracker.database.DatabaseHelper;
 import com.example.android.moodtracker.R;
 import com.example.android.moodtracker.adapters.RvAdapter;
@@ -84,13 +85,20 @@ public class MoodHistory extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
                 break;
             case R.id.see_pie_chart:
-                startActivity(new Intent(MoodHistory.this, PieChartActivity.class));
-                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+
+                if (returnTrueIfThereIsStateDataInDaysTable()){
+                    startActivity(new Intent(MoodHistory.this, PieChartActivity.class));
+                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+                }
+                else {
+                    Toast.makeText(MoodHistory.this,
+                            getResources().getString(R.string.no_data_no_pie_chart),
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
                 break;
             case R.id.delete_comment_history:
-
                 alertDialogDeleteHistory();
-
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -128,6 +136,27 @@ public class MoodHistory extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private boolean returnTrueIfThereIsStateDataInDaysTable () {
+
+        int counter = 0;
+        mCursor.moveToFirst();
+
+        for (int i = 0; i < mCursor.getCount() ; i++) {
+            if (mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID)) == 6){
+                counter++;
+                if (i != mCursor.getCount()-1) {
+                    mCursor.moveToNext();
+                }
+            }
+        }
+
+        //If counter is equal to the number of rows, then it means that all are 6,
+        //which means there is no information in the database
+        if (counter != mCursor.getCount())return true;
+        else return false;
+
     }
 
 }

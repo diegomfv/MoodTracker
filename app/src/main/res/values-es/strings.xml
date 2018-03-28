@@ -3,6 +3,7 @@
 <resources>
     <!-- GENERAL STRINGS -->
     <string name="app_name">MoodTracker</string>
+    <string name="toast_swipe_to_change">Desliza a izquierda y derecha para cambiar entre estados</string>
     <string name="mood_history_button">Mood History Button</string>
     <string name="custom_note_button">Custom Note Button</string>
     <string name="smiley_face_button">Smiley Face Button</string>
@@ -42,5 +43,8 @@
     <string name="delete_history_positive_button">Sí, estoy seguro</string>
     <string name="delete_history_negative_button">No</string>
     <string name="delete_history_toast">El historial ha sido borrado</string>
+
+    <!-- MOOD HISTORY PIE CHART BUTTON -->
+    <string name="no_data_no_pie_chart">No hay datos que mostrar</string>
 
 </resources>

@@ -1,6 +1,8 @@
 <resources>
+
     <!-- GENERAL STRINGS -->
     <string name="app_name">Mood Tracker</string>
+    <string name="toast_swipe_to_change">Swipe left and right to change between happiness!</string>
     <string name="mood_history_button">Mood History Button</string>
     <string name="custom_note_button">Custom Note Button</string>
     <string name="smiley_face_button">Smiley Face Button</string>
@@ -40,6 +42,10 @@
     <string name="delete_history_positive_button">Yes, I am sure</string>
     <string name="delete_history_negative_button">No</string>
     <string name="delete_history_toast">History has been deleted</string>
+
+    <!-- MOOD HISTORY PIE CHART BUTTON -->
+    <string name="no_data_no_pie_chart">There is no data to show in a Pie Chart</string>
+
 
 
 </resources>

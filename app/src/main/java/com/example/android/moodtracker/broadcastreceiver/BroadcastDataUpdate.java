@@ -15,27 +15,21 @@ import com.example.android.moodtracker.database.DatabaseHelper;
 
 public class BroadcastDataUpdate extends BroadcastReceiver {
 
+    /** The broadcast receiver is called by the alarm at midnight. It updates the days table
+     * moving the information of each row to the next one. The information of the last
+     * row is deleted permanently. The first row becomes empty (state = 6, comment = "") */
+
     DatabaseHelper dbH;
     Cursor mCursor;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        //Checks the method has been called
-        Log.i("ON RECEIVE", "called");
-
-        //Creates the databaseHelper
         dbH = new DatabaseHelper(context);
 
-        //Gets all the data from the database
         mCursor = dbH.getAllDataFromDaysTable();
-        Log.i("CURSOR GOT DATA", "YES");
 
-        //Checks if the cursor is empty
-        if (mCursor.getCount() == 0) {
-
-        }
-        else {
+        if (mCursor.getCount() != 0) {
 
             /**
              * The loop iterates through the database table using the cursor
@@ -51,7 +45,6 @@ public class BroadcastDataUpdate extends BroadcastReceiver {
             for (int i = 0; i < mCursor.getCount() - 1; i++) {
 
                 mCursor.moveToPosition(i);
-                Log.i("CURSOR", "movedToPosition(" + i + ")");
 
                 int state = mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID));
                 String comment = mCursor.getString(mCursor.getColumnIndex(DatabaseContract.Database.COMMENT));
