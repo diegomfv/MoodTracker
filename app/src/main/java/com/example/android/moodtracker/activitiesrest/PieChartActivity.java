@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.android.moodtracker.activitiesmoodstate.MainActivity;
@@ -57,14 +56,17 @@ public class PieChartActivity extends AppCompatActivity{
         setContentView(R.layout.pie_chart_layout);
 
         dbH = new DatabaseHelper(this);
-        mCursor = dbH.getAllData();
-        mCursor.moveToFirst();
+        mCursor = dbH.getAllDataFromDaysTable();
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(android.R.drawable.ic_menu_revert);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         ArrayForColors = new ArrayList<>();
+
+        mCursor.moveToFirst();
 
         for (int i = 0; i < mCursor.getCount(); i++) {
 
@@ -161,7 +163,8 @@ public class PieChartActivity extends AppCompatActivity{
 
         switch (item.getItemId()){
             case android.R.id.home:
-                startActivity (new Intent(PieChartActivity.this, MainActivity.class));
+                startActivity (new Intent(PieChartActivity.this, MoodHistory.class));
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
                 break;
         }
         return super.onOptionsItemSelected(item);

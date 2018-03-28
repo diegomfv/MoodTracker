@@ -5,10 +5,10 @@ package com.example.android.moodtracker.database;
  */
 
 
-/** DatabaseValues class has important information that will be used to
- * fill the database:
- * days,
- * states */
+/** DATABASEVALUES class has the information
+ * that will be used to fill the database:
+ * days table,
+ * states table */
 public class DatabaseValues {
 
     //Different days that will be displayed in the Recycler View

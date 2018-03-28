@@ -75,59 +75,59 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
 
         int state = mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID));
         int color;
-        LinearLayout.LayoutParams paramsleft = new LinearLayout.LayoutParams(0,
+        LinearLayout.LayoutParams paramsLeft = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-        LinearLayout.LayoutParams paramsright = new LinearLayout.LayoutParams(0,
+        LinearLayout.LayoutParams paramsRight = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.MATCH_PARENT);
 
         switch (state) {
             case 1: {
                 color = ContextCompat.getColor(mContext, R.color.faded_red);
                 holder.left_bar.setBackgroundColor(color);
-                paramsleft.weight = 0.2f;
-                holder.left_bar.setLayoutParams(paramsleft);
-                paramsright.weight = 0.8f;
-                holder.right_bar.setLayoutParams(paramsright);
+                paramsLeft.weight = 0.2f;
+                holder.left_bar.setLayoutParams(paramsLeft);
+                paramsRight.weight = 0.8f;
+                holder.right_bar.setLayoutParams(paramsRight);
             } break;
             case 2: {
                 color = ContextCompat.getColor(mContext, R.color.warm_grey);
                 holder.left_bar.setBackgroundColor(color);
-                paramsleft.weight = 0.4f;
-                holder.left_bar.setLayoutParams(paramsleft);
-                paramsright.weight = 0.6f;
-                holder.right_bar.setLayoutParams(paramsright);
+                paramsLeft.weight = 0.4f;
+                holder.left_bar.setLayoutParams(paramsLeft);
+                paramsRight.weight = 0.6f;
+                holder.right_bar.setLayoutParams(paramsRight);
             } break;
             case 3: {
                 color = ContextCompat.getColor(mContext, R.color.cornflower_blue_65);
                 holder.left_bar.setBackgroundColor(color);
-                paramsleft.weight = 0.6f;
-                holder.left_bar.setLayoutParams(paramsleft);
-                paramsright.weight = 0.4f;
-                holder.right_bar.setLayoutParams(paramsright);
+                paramsLeft.weight = 0.6f;
+                holder.left_bar.setLayoutParams(paramsLeft);
+                paramsRight.weight = 0.4f;
+                holder.right_bar.setLayoutParams(paramsRight);
             } break;
             case 4: {
                 color = ContextCompat.getColor(mContext, R.color.light_sage);
                 holder.left_bar.setBackgroundColor(color);
-                paramsleft.weight = 0.8f;
-                holder.left_bar.setLayoutParams(paramsleft);
-                paramsright.weight = 0.2f;
-                holder.right_bar.setLayoutParams(paramsright);
+                paramsLeft.weight = 0.8f;
+                holder.left_bar.setLayoutParams(paramsLeft);
+                paramsRight.weight = 0.2f;
+                holder.right_bar.setLayoutParams(paramsRight);
             } break;
             case 5: {
                 color = ContextCompat.getColor(mContext, R.color.banana_yellow);
                 holder.left_bar.setBackgroundColor(color);
-                paramsleft.weight = 1;
-                holder.left_bar.setLayoutParams(paramsleft);
-                paramsright.weight = 0;
-                holder.right_bar.setLayoutParams(paramsright);
+                paramsLeft.weight = 1;
+                holder.left_bar.setLayoutParams(paramsLeft);
+                paramsRight.weight = 0;
+                holder.right_bar.setLayoutParams(paramsRight);
             } break;
             case 6: {
                 color = ContextCompat.getColor(mContext, R.color.whiteColor);
                 holder.left_bar.setBackgroundColor(color);
-                paramsleft.weight = 1;
-                holder.left_bar.setLayoutParams(paramsleft);
-                paramsright.weight = 0;
-                holder.right_bar.setLayoutParams(paramsright);
+                paramsLeft.weight = 1;
+                holder.left_bar.setLayoutParams(paramsLeft);
+                paramsRight.weight = 0;
+                holder.right_bar.setLayoutParams(paramsRight);
 
             } break;
             default: {

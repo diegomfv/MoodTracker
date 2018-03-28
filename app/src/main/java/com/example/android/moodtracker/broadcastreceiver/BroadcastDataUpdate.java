@@ -14,7 +14,7 @@ import com.example.android.moodtracker.database.DatabaseHelper;
  */
 
 public class BroadcastDataUpdate extends BroadcastReceiver {
-    //PROPERTIES USED TO UPDATE THE DATABASE
+
     DatabaseHelper dbH;
     Cursor mCursor;
 
@@ -28,21 +28,22 @@ public class BroadcastDataUpdate extends BroadcastReceiver {
         dbH = new DatabaseHelper(context);
 
         //Gets all the data from the database
-        mCursor = dbH.getAllData();
-        Log.i("READ CURSOR CLICKED", "");
+        mCursor = dbH.getAllDataFromDaysTable();
+        Log.i("CURSOR GOT DATA", "YES");
 
         //Checks if the cursor is empty
         if (mCursor.getCount() == 0) {
-            //Toast.makeText(context, "Cursor is empty", Toast.LENGTH_LONG).show();
+
         }
         else {
 
             /**
              * The loop iterates through the database table using the cursor
-             * We have to take into consideration that the position of the Cursor and
+             * We have to take into consideration that
+             * the position of the Cursor and
              * the variable position in "changeRow(state,comment,position) function
              * ARE NOT RELATED TO THE SAME ROW.
-             * Cursor position is related this way --> Cursor = x; id = x+1;
+             * Cursor position is related this way --> Cursor position = x; id = x+1;
              * Position is changeRow is this way --> Position = id;
              * */
 
@@ -65,7 +66,6 @@ public class BroadcastDataUpdate extends BroadcastReceiver {
 
             dbH.updateDataDays(state, comment, 1);
 
-            //Toast.makeText(context, "Database Updated", Toast.LENGTH_LONG).show();
         }
     }
 }

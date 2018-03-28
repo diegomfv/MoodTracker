@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(MainActivity.this, getString(R.string.mood_history_toast), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, MoodHistory.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
 
             }
         });
@@ -218,4 +219,5 @@ public class MainActivity extends AppCompatActivity
                     pendingIntent);
         }
     }
+
 }

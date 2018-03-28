@@ -33,7 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    //Table creation STATEMENTS (for both, days and states table).
+    /** TBALE CREATION STATEMENTS. We use them
+     *  to create the database*/
     private static final String CREATE_DAYS_TABLE =
             "CREATE TABLE " + DatabaseContract.Database.DAYS_TABLE_NAME
                     + " ("
@@ -52,7 +53,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + DatabaseContract.Database.STATE + " TEXT NOT NULL"
             + ")";
 
-    //CREATING THE TABLES with the DatabaseHelper
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
@@ -62,7 +62,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //UPGRADING THE TABLES with the DatabaseHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -74,7 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    //METHOD FOR INSERTING ALL THE INFORMATION IN THE DATABASE THE FIRST TIME THE APP RUNS (DAYS TABLE)
+    /** METHOD FOR INSERTING ALL THE INFORMATION IN THE DATABASE
+     * the first time the app runs (days table) */
     public boolean insertFirstDataDays(String day, int state_id, String comment) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -96,7 +96,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    //METHOD FOR INSERTING ALL THE INFORMATION IN THE DATABASE THE FIRST TIME THE APP RUNS (STATES TABLE)
+    /** METHOD FOR INSERTING ALL THE INFORMATION IN THE DATABASE
+     * the first time the app runs (states table) */
     public boolean insertFirstDataStates(String state) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -117,8 +118,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //METHOD FOR UPDATING TODAY'S STATE (when a face button has been clicked)
+    /** METHOD FOR UPDATING TODAY'S STATE
+     * (when a face button has been clicked)*/
     public boolean updateDataDaysStateInToday(int state) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseContract.Database.STATE_ID, state);
@@ -128,8 +131,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 null) > 0;
     }
 
-    //METHOD FOR UPDATING TODAY'S COMMENT (in ALERT DIALOG)
+    /** METHOD FOR UPDATING TODAY'S COMMENT
+     * (in ALERT DIALOG) */
     public boolean updateDataDaysCommentInToday(String comment) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseContract.Database.COMMENT, comment);
@@ -139,8 +144,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 null) > 0;
     }
 
-    //METHOD USED IN BROADCAST TO UPDATE THE DATABASE WHEN A DAY ENDS
+    /** METHOD USED IN BROADCAST RECEIVER
+     *  to UPDATE the database when a DAY ends */
     public boolean updateDataDays(int state, String comment, int position) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseContract.Database.STATE_ID, state);
@@ -151,8 +158,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 null) > 0;
     }
 
-    //METHOD USED TO FILL THE CURSOR WITH ALL THE DATA FROM THE DATABASE
-    public Cursor getAllData () {
+    /** METHOUS USED TO FIL THE CURSOR with all the data from
+     * the days table */
+    public Cursor getAllDataFromDaysTable() {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -163,8 +171,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //METHOD USED TO CHECK IF A TABLE IS EMPTY (used to avoid the app
-    // to run insertFirstDays and inserfFirstDataStates more than once)
+    /**
+     * METHOD FOR RESETTING AUTOINCREMENT ID from each table
+     * */
+    public void resetAutoIncrement (String table_name) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + table_name + "'");
+
+    }
+
+    /** METHOD USED TO CHECK IF A TABLE IS EMPTY (used to avoid the app
+    // to run insertFirstDays and inserfFirstDataStates more than once)*/
     public boolean isTableEmpty(String table_name) {
 
         boolean flag;
@@ -185,7 +204,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return flag;
     }
 
-    //METHOD FOR DATABASE MANAGER --> CAN BE REMOVED
+    /** METHOD FOR DATABASE MANAGER --> CAN BE REMOVED */
     public ArrayList<Cursor> getData(String Query) {
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();
