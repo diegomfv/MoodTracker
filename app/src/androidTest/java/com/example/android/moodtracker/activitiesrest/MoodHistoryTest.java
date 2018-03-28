@@ -59,7 +59,7 @@ public class MoodHistoryTest {
         /** The monitor returns the second activity (the one launched after the click when
          * the view is clicked) */
 
-        Activity pieChartActivity =  getInstrumentation().waitForMonitorWithTimeout(monitor, 5000);
+        Activity pieChartActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 5000);
 
         /** We check that the called activity is not null */
 
