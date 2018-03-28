@@ -21,6 +21,8 @@
         <activity android:name=".activitiesmoodstate.DisappointedSmiley" />
         <activity android:name=".activitiesmoodstate.SadSmiley" />
         <activity android:name=".activitiesrest.MoodHistory" />
+        <activity android:name=".activitiesrest.PieChartActivity" />
+
         <receiver android:name=".broadcastreceiver.BroadcastDataUpdate"
             android:enabled="true"
             android:exported="true">

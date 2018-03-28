@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.android.moodtracker.activitiesmoodstate.MainActivity;
 import com.example.android.moodtracker.database.DatabaseContract;
 import com.example.android.moodtracker.database.DatabaseHelper;
 import com.example.android.moodtracker.R;
@@ -26,8 +27,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
-
 /**
  * Created by Diego Fajardo on 27/03/2018.
  */
@@ -43,9 +42,7 @@ public class PieChartActivity extends AppCompatActivity{
     private float superHappy = 0;
     private float no_mood = 0;
 
-    public int[] MY_COLORS = {
-            rgb("#ffde3c50"), rgb("#ff9b9b9b"), rgb("#a5468ad9"), rgb("#ffb8e986"), rgb("#fff9ec4f")
-    };
+    int[] COLORS;
 
     public List<Integer> ArrayForColors;
 
@@ -85,16 +82,6 @@ public class PieChartActivity extends AppCompatActivity{
 
         }
 
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PieChartActivity.this, AndroidDatabaseManager.class);
-                startActivity(intent);
-            }
-        });
-
-
         pieChart = (PieChart) findViewById(R.id.pie_chart);
 
         pieChart.setUsePercentValues(false);
@@ -115,7 +102,7 @@ public class PieChartActivity extends AppCompatActivity{
         if (superHappy != 0) { ArrayForColors.add(getResources().getColor(R.color.banana_yellow)); }
         if (no_mood != 0) { ArrayForColors.add(getResources().getColor(R.color.whiteColor)); }
 
-        int[] COLORS = new int[ArrayForColors.size()];
+        COLORS = new int[ArrayForColors.size()];
 
         int counter = 0;
 
