@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.android.moodtracker.Data.DatabaseHelper;
+import com.example.android.moodtracker.database.DatabaseHelper;
 import com.example.android.moodtracker.R;
 import com.example.android.moodtracker.adapters.RvAdapter;
 
