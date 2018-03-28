@@ -78,7 +78,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testThatNormalSmileyActivityIsLaunched () {
+    public void testThatNormalSmileyIsLaunched () {
 
         onView(withId(R.id.container_main))
                 .perform(ViewActions.swipeRight());
@@ -92,7 +92,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testThatSuperHappySmileyActivityIsLaunched () {
+    public void testThatSuperHappySmileyIsLaunched () {
 
         onView(withId(R.id.container_main))
                 .perform(ViewActions.swipeLeft());

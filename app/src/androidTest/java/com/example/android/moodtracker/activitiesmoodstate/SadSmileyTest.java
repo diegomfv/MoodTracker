@@ -67,7 +67,7 @@ public class SadSmileyTest {
     }
 
     @Test
-    public void testThatMainActivityIsLaunched() {
+    public void testThatDisappointedSmileyIsLaunched() {
 
         onView(withId(R.id.container_sad))
                 .perform(ViewActions.swipeLeft());
