@@ -96,6 +96,12 @@ public class MainActivity extends AppCompatActivity
                 animator.setDuration(500);
                 animator.start();
 
+                //Used for feedback to the user
+                Toast.makeText(MainActivity.this, getString(R.string.day_set_happy), Toast.LENGTH_LONG).show();
+
+                //UPDATES the state of the day
+                dbH.updateDataDaysStateInToday(4);
+
             }
         });
 
@@ -135,6 +141,30 @@ public class MainActivity extends AppCompatActivity
                 R.anim.fade_out);
     }
 
+    //CODE FOR MANAGING TOUCH EVENTS
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return this.mGestureDetector.onTouchEvent(event);
+        //return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if (e1.getX() - e2.getX() > 200) //to differentiate from a tap
+        {
+            Intent intent = new Intent(MainActivity.this, SuperHappySmiley.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        }
+        if (e1.getX() - e2.getX() < -200) //to differentiate from a tap
+        {
+            Intent intent = new Intent(MainActivity.this, NormalSmiley.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        }
+        return true;
+    }
+
     @Override
     public boolean onDown(MotionEvent e) {
         return false;
@@ -159,24 +189,6 @@ public class MainActivity extends AppCompatActivity
     public void onLongPress(MotionEvent e) {
 
     }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        if (e1.getX() - e2.getX() > 200) //to differentiate from a tap
-        {
-            Intent intent = new Intent(MainActivity.this, SuperHappySmiley.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
-        }
-        if (e1.getX() - e2.getX() < -200) //to differentiate from a tap
-        {
-            Intent intent = new Intent(MainActivity.this, NormalSmiley.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-        }
-        return true;
-    }
-
 
     private void createAlarm () {
 

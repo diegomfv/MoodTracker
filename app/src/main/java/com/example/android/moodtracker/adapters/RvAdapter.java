@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.moodtracker.Data.DatabaseContract;
+import com.example.android.moodtracker.database.DatabaseContract;
 import com.example.android.moodtracker.R;
 
 /**
