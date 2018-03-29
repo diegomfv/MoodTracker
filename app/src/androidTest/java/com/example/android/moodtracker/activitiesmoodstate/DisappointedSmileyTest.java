@@ -129,6 +129,12 @@ public class DisappointedSmileyTest {
 
     }
 
+    @Test
+    public void testThatClickingTheFaceButtonUpdatesTheDatabase () {
+
+        assertTrue(mActivity.dbH.updateDataDaysStateInToday(2));
+
+    }
 
     @After
     public void tearDown() throws Exception {

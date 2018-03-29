@@ -17,7 +17,10 @@ import org.junit.Test;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 /**
@@ -96,6 +99,25 @@ public class SadSmileyTest {
 
     }
 
+    @Test
+    public void testThatCommentDialogIsLaunched () {
+
+        View view3 = mActivity.findViewById(R.id.custom_note_button_sad);
+        assertNotNull(view3);
+
+        onView(withId(R.id.custom_note_button_sad)).perform(click());
+
+        onView(withText(R.string.alert_dialog_box_ok)).check(matches(isDisplayed()));
+        onView(withText(R.string.alert_dialog_box_cancel)).check(matches(isDisplayed()));
+
+    }
+
+    @Test
+    public void testThatClickingTheFaceButtonUpdatesTheDatabase () {
+
+        assertTrue(mActivity.dbH.updateDataDaysStateInToday(1));
+
+    }
 
     @After
     public void tearDown() throws Exception {

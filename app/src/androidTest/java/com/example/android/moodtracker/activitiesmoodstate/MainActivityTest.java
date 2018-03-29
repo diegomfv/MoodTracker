@@ -139,6 +139,12 @@ public class MainActivityTest {
 
     }
 
+    @Test
+    public void testThatClickingTheFaceButtonUpdatesTheDatabase () {
+
+        assertTrue(mActivity.dbH.updateDataDaysStateInToday(4));
+
+    }
 
     @After
     public void tearDown() throws Exception {

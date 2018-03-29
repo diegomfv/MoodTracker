@@ -136,6 +136,12 @@ public class NormalSmileyTest {
 
     }
 
+    @Test
+    public void testThatClickingTheFaceButtonUpdatesTheDatabase () {
+
+        assertTrue(mActivity.dbH.updateDataDaysStateInToday(3));
+
+    }
 
     @After
     public void tearDown() throws Exception {
