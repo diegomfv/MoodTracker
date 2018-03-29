@@ -59,7 +59,7 @@ public class MoodHistoryTest {
     @Test
     public void testLaunchOfPieChartActivityOnButtonClick () {
 
-        mActivity.dbH.updateDataDaysStateInToday(3);
+        mActivity.dbH.updateDataDays(5, "", 14);
 
         assertNotNull(mActivity.findViewById(R.id.see_pie_chart));
 
@@ -75,8 +75,6 @@ public class MoodHistoryTest {
 
     @Test
     public void testLaunchOfMainActivityOnBackArrowButtonClick () {
-
-        mActivity.dbH.updateDataDaysStateInToday(3);
 
         onView(withContentDescription(R.string.go_back_main_activity)).perform(click());
 
@@ -107,6 +105,7 @@ public class MoodHistoryTest {
     @After
     public void tearDown() throws Exception {
 
+        mActivity = null;
 
     }
 

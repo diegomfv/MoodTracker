@@ -14,6 +14,7 @@ import com.example.android.moodtracker.database.DatabaseHelper;
 import com.example.android.moodtracker.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -36,12 +37,12 @@ public class PieChartActivity extends AppCompatActivity{
 
     private PieChart pieChart;
 
-    private float sad = 0;
-    private float disappointed= 0;
-    private float normal = 0;
-    private float happy = 0;
-    private float superHappy = 0;
-    private float no_mood = 0;
+    private float daysSad = 0;
+    private float daysDisappointed = 0;
+    private float daysNormal = 0;
+    private float daysHappy = 0;
+    private float daysSuperHappy = 0;
+    private float daysNoMood = 0;
 
     int[] COLORS;
 
@@ -56,7 +57,7 @@ public class PieChartActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pie_chart_layout);
-        setTitle("Mood Pie Chart");
+        setTitle(R.string.title_pie_chart_activity);
 
         dbH = new DatabaseHelper(this);
         mCursor = dbH.getAllDataFromDaysTable();
@@ -65,6 +66,7 @@ public class PieChartActivity extends AppCompatActivity{
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeActionContentDescription(R.string.go_back_mood_history);
         }
 
         ArrayForColors = new ArrayList<>();
@@ -76,73 +78,61 @@ public class PieChartActivity extends AppCompatActivity{
             int state = mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID));
 
             switch (state){
-                case 1: sad++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
-                case 2: disappointed++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
-                case 3: normal++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
-                case 4: happy++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
-                case 5: superHappy++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
-                case 6: no_mood++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
+                case 1: daysSad++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
+                case 2: daysDisappointed++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
+                case 3: daysNormal++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
+                case 4: daysHappy++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
+                case 5: daysSuperHappy++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
+                case 6: daysNoMood++; if (i != mCursor.getCount()) { mCursor.moveToNext(); } break;
 
             }
 
         }
 
         pieChart = (PieChart) findViewById(R.id.pie_chart);
-
         pieChart.setUsePercentValues(false);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5,10,5,5);
         pieChart.setDragDecelerationFrictionCoef(0.15f);
         pieChart.setEntryLabelColor(Color.BLACK);
-
         pieChart.setDrawHoleEnabled(false);
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(55f);
 
-
-        if (sad != 0) { ArrayForColors.add(getResources().getColor(R.color.faded_red)); }
-        if (disappointed != 0) { ArrayForColors.add(getResources().getColor(R.color.warm_grey)); }
-        if (normal != 0) { ArrayForColors.add(getResources().getColor(R.color.cornflower_blue_65)); }
-        if (happy != 0) { ArrayForColors.add(getResources().getColor(R.color.light_sage)); }
-        if (superHappy != 0) { ArrayForColors.add(getResources().getColor(R.color.banana_yellow)); }
-        if (no_mood != 0) { ArrayForColors.add(getResources().getColor(R.color.whiteColor)); }
-
-        COLORS = new int[ArrayForColors.size()];
-
-        int counter = 0;
-
-        if (sad != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
-        if (disappointed != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
-        if (normal != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
-        if (happy != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
-        if (superHappy != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
-        if (no_mood != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
-
+        /** We get the array of colors that we are going to use in the Pie Chart
+         *  */
+        COLORS = getColors(
+                daysSad,
+                daysDisappointed,
+                daysNormal,
+                daysHappy,
+                daysSuperHappy,
+                daysNoMood);
 
         ArrayList<PieEntry> yValues = new ArrayList<>();
 
-        if (sad != 0) {
-            yValues.add(new PieEntry(sad, "Sad"));
+        if (daysSad != 0) {
+            yValues.add(new PieEntry(daysSad, "Sad"));
         }
 
-        if (disappointed != 0) {
-            yValues.add(new PieEntry(disappointed, "Disappointed"));
+        if (daysDisappointed != 0) {
+            yValues.add(new PieEntry(daysDisappointed, "Disappointed"));
         }
 
-        if (normal != 0) {
-            yValues.add(new PieEntry(normal, "Normal"));
+        if (daysNormal != 0) {
+            yValues.add(new PieEntry(daysNormal, "Normal"));
         }
 
-        if (happy != 0) {
-            yValues.add(new PieEntry(happy, "Happy"));
+        if (daysHappy != 0) {
+            yValues.add(new PieEntry(daysHappy, "Happy"));
         }
 
-        if (superHappy != 0) {
-            yValues.add(new PieEntry(superHappy, "Super Happy"));
+        if (daysSuperHappy != 0) {
+            yValues.add(new PieEntry(daysSuperHappy, "Super Happy"));
         }
 
-        //if (no_mood != 0) {
-        //    yValues.add(new PieEntry(no_mood, "No Mood"));
+        //if (daysNoMood != 0) {
+        //    yValues.add(new PieEntry(daysNoMood, "No Mood"));
         //}
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
@@ -156,6 +146,13 @@ public class PieChartActivity extends AppCompatActivity{
         PieData data = new PieData(dataSet);
         data.setValueTextSize(18f);
         data.setValueTextColor(Color.BLACK);
+
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(false);
+        //legend.setFormSize(10f);
+        //legend.setTextSize(12f);
+        //legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        //legend.setForm(Legend.LegendForm.CIRCLE);
 
         pieChart.setData(data);
 
@@ -180,9 +177,51 @@ public class PieChartActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    /** Method used to get the colors for the Pie chart.
+     * The Pie Charts uses an array of "int" for the colors but needs "float" variables to
+     * set the size of each pie slice.
+     * Firstly, we use a List to store the colors we are going to use according to the states
+     * we have in the database.
+     * Secondly, we use the List's size to determine the size of the array of "int".
+     * Lastly, we fill the array with the colors.
+     * */
+    public int[] getColors (float daysSad,
+                            float daysDisappointed,
+                            float daysNormal,
+                            float daysHappy,
+                            float daysSuperHappy,
+                            float daysNoMood) {
+
+        List <Integer> ArrayForColors = new ArrayList<>();
+
+        //We used a List to het the colors and the size of the array
+        if (daysSad != 0) { ArrayForColors.add(getResources().getColor(R.color.faded_red)); }
+        if (daysDisappointed != 0) { ArrayForColors.add(getResources().getColor(R.color.warm_grey)); }
+        if (daysNormal != 0) { ArrayForColors.add(getResources().getColor(R.color.cornflower_blue_65)); }
+        if (daysHappy != 0) { ArrayForColors.add(getResources().getColor(R.color.light_sage)); }
+        if (daysSuperHappy != 0) { ArrayForColors.add(getResources().getColor(R.color.banana_yellow)); }
+        if (daysNoMood != 0) { ArrayForColors.add(getResources().getColor(R.color.whiteColor)); }
+
+        //We set the size of the array as the size of the list
+        COLORS = new int[ArrayForColors.size()];
+
+        int counter = 0;
+
+        //We set the order of the colors according
+        // to the states of the days we have in the database
+        if (daysSad != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
+        if (daysDisappointed != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
+        if (daysNormal != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
+        if (daysHappy != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
+        if (daysSuperHappy != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
+        if (daysNoMood != 0) { COLORS [counter] = ArrayForColors.get(counter); counter++; }
+
+        return COLORS;
+
+    }
+
     /** Changes the format the data
      *  is displayed in the PieChart */
-
     public class MyValueFormatter implements IValueFormatter {
 
         private DecimalFormat mFormat;

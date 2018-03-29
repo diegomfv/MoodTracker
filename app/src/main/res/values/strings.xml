@@ -50,6 +50,9 @@
     <!-- MOOD HISTORY BACK BUTTON -->
     <string name="go_back_main_activity">Go back to Main Activity</string>
 
+    <!-- PIE CHART ACTIVITY BACK BUTTON -->
+    <string name="go_back_mood_history">Go back to Mood History</string>
+    <string name="title_pie_chart_activity">Mood Pie Chart</string>
 
 
 </resources>
