@@ -2,10 +2,8 @@ package com.example.android.moodtracker.activitiesrest;
 
 import android.app.Activity;
 import android.app.Instrumentation;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
-import com.android.dx.command.Main;
 import com.example.android.moodtracker.R;
 import com.example.android.moodtracker.activitiesmoodstate.MainActivity;
 
@@ -21,9 +19,8 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Diego Fajardo on 28/03/2018.

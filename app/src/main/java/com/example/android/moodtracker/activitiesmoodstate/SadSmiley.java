@@ -15,10 +15,10 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.android.moodtracker.R;
 import com.example.android.moodtracker.activitiesrest.MoodHistory;
 import com.example.android.moodtracker.alertdialog.AlertDialogCreator;
 import com.example.android.moodtracker.database.DatabaseHelper;
-import com.example.android.moodtracker.R;
 
 /**
  * Created by Diego Fajardo on 13/01/2018.

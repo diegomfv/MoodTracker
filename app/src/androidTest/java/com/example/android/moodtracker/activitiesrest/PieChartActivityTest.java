@@ -5,7 +5,6 @@ import android.app.Instrumentation;
 import android.support.test.rule.ActivityTestRule;
 
 import com.example.android.moodtracker.R;
-import com.example.android.moodtracker.activitiesmoodstate.MainActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,8 +14,12 @@ import org.junit.Test;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeRight;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static org.junit.Assert.*;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Diego Fajardo on 29/03/2018.
@@ -56,16 +59,17 @@ public class PieChartActivityTest {
 
     }
 
+    @Test
+    public void testCheckThatPieChartMoves () {
 
+        onView(withId(R.id.pie_chart)).perform(swipeRight()).check(matches(isDisplayed()));
 
-
-
-
+    }
 
     @After
     public void tearDown() throws Exception {
 
-
+        mActivity = null;
 
     }
 

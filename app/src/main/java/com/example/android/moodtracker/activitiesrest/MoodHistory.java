@@ -13,11 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.android.moodtracker.R;
 import com.example.android.moodtracker.activitiesmoodstate.MainActivity;
+import com.example.android.moodtracker.adapters.RvAdapter;
 import com.example.android.moodtracker.database.DatabaseContract;
 import com.example.android.moodtracker.database.DatabaseHelper;
-import com.example.android.moodtracker.R;
-import com.example.android.moodtracker.adapters.RvAdapter;
 
 /**
  * Created by Diego Fajardo on 13/01/2018.

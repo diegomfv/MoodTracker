@@ -9,9 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.android.moodtracker.R;
 import com.example.android.moodtracker.database.DatabaseContract;
 import com.example.android.moodtracker.database.DatabaseHelper;
-import com.example.android.moodtracker.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;

@@ -6,11 +6,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,11 +20,11 @@ import android.widget.Toast;
 
 import com.example.android.moodtracker.R;
 import com.example.android.moodtracker.activitiesrest.MoodHistory;
+import com.example.android.moodtracker.alertdialog.AlertDialogCreator;
 import com.example.android.moodtracker.broadcastreceiver.BroadcastDataUpdate;
 import com.example.android.moodtracker.database.DatabaseContract;
 import com.example.android.moodtracker.database.DatabaseHelper;
 import com.example.android.moodtracker.database.DatabaseValues;
-import com.example.android.moodtracker.alertdialog.AlertDialogCreator;
 
 import java.util.Calendar;
 
