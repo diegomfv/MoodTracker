@@ -2,9 +2,12 @@ package com.example.android.moodtracker.activitiesrest;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
+import com.android.dx.command.Main;
 import com.example.android.moodtracker.R;
+import com.example.android.moodtracker.activitiesmoodstate.MainActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +17,12 @@ import org.junit.Test;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 /**
@@ -28,9 +36,15 @@ public class MoodHistoryTest {
 
     private MoodHistory mActivity = null;
 
-    Instrumentation.ActivityMonitor monitor =
+    Instrumentation.ActivityMonitor pieChartActivitymonitor =
             getInstrumentation().addMonitor(
                     PieChartActivity.class.getName(),
+                    null,
+                    false);
+
+    Instrumentation.ActivityMonitor mainActivityMonitor =
+            getInstrumentation().addMonitor(
+                    MainActivity.class.getName(),
                     null,
                     false);
 
@@ -43,29 +57,49 @@ public class MoodHistoryTest {
     }
 
     @Test
-    public void testLaunchOfSecondActivityOnButtonClick() {
+    public void testLaunchOfPieChartActivityOnButtonClick () {
 
-        //View view1 = mActivity.findViewById(R.id.see_pie_chart);
-        //assertNotNull(view1);
-
-        /** We first check thay the button is not null */
+        mActivity.dbH.updateDataDaysStateInToday(3);
 
         assertNotNull(mActivity.findViewById(R.id.see_pie_chart));
 
-        /** We then perform a click on it */
-
         onView(withId(R.id.see_pie_chart)).perform(click());
 
-        /** The monitor returns the second activity (the one launched after the click when
-         * the view is clicked) */
-
-        Activity pieChartActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 5000);
-
-        /** We check that the called activity is not null */
+        Activity pieChartActivity = getInstrumentation().waitForMonitorWithTimeout(pieChartActivitymonitor, 5000);
 
         assertNotNull(pieChartActivity);
 
         pieChartActivity.finish();
+
+    }
+
+    @Test
+    public void testLaunchOfMainActivityOnBackArrowButtonClick () {
+
+        mActivity.dbH.updateDataDaysStateInToday(3);
+
+        onView(withContentDescription(R.string.go_back_main_activity)).perform(click());
+
+        Activity mainActivity = getInstrumentation().waitForMonitorWithTimeout(mainActivityMonitor, 5000);
+
+        assertNotNull(mainActivity);
+
+        mainActivity.finish();
+
+    }
+
+    @Test
+    public void testDatabaseIsDeletedOnButtonClick () {
+
+        mActivity.dbH.updateDataDaysStateInToday(3);
+
+        assertNotNull(mActivity.findViewById(R.id.delete_comment_history));
+
+        onView(withId(R.id.delete_comment_history)).perform(click());
+
+        onView(withText(R.string.delete_history_positive_button)).perform(click());
+
+        onView(withId(R.id.delete_comment_history)).perform(click()).check(matches(isDisplayed()));
 
     }
 

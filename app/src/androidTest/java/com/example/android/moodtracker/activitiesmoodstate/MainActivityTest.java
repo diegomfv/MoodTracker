@@ -17,7 +17,9 @@ import org.junit.Test;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -124,7 +126,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testThatCommentDialogIsLaunched () {
+    public void testThatCommentDialogIsLaunchedAndTextMustBeAdded () {
 
         View view3 = mActivity.findViewById(R.id.custom_note_button_main);
         assertNotNull(view3);
@@ -136,6 +138,32 @@ public class MainActivityTest {
 
         onView(withText(R.string.alert_dialog_box_ok)).check(matches(isDisplayed()));
         onView(withText(R.string.alert_dialog_box_cancel)).check(matches(isDisplayed()));
+
+        onView(withText(R.string.alert_dialog_box_ok)).perform(click());
+
+        onView(withText(R.string.alert_dialog_box_ok)).check(matches(isDisplayed()));
+
+    }
+
+    @Test
+    public void testThatCommentDialogIsLaunchedAndClosedWhenTextIsAdded () {
+
+        View view3 = mActivity.findViewById(R.id.custom_note_button_main);
+        assertNotNull(view3);
+
+        onView(withId(R.id.custom_note_button_main)).perform(click());
+
+        /** We check that the dialog appears checking that a view (in this case two) with a
+         * specific text is shown */
+
+        onView(withText(R.string.alert_dialog_box_ok)).check(matches(isDisplayed()));
+        onView(withText(R.string.alert_dialog_box_cancel)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.alertDialogComment)).perform(typeText("This is a test"));
+
+        onView(withText(R.string.alert_dialog_box_ok)).perform(click());
+
+        onView(withId(R.id.happy_face_button)).check(matches(isClickable()));
 
     }
 

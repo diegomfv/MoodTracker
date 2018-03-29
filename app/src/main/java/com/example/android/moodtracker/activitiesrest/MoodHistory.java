@@ -52,6 +52,7 @@ public class MoodHistory extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeActionContentDescription(R.string.go_back_main_activity);
         }
 
         dbH = new DatabaseHelper(this);
@@ -104,7 +105,7 @@ public class MoodHistory extends AppCompatActivity {
                 /** If there is no data in days table, the user can't go to
                  * PieChartActivity
                  * */
-                if (returnTrueIfThereIsStateDataInDaysTable(mCursor)){
+                if (returnTrueIfThereIsStateDataInDaysTable()){
                     startActivity(new Intent(MoodHistory.this, PieChartActivity.class));
                     overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
                 }
@@ -118,8 +119,16 @@ public class MoodHistory extends AppCompatActivity {
 
             case R.id.delete_comment_history:
 
-                /** Button used to delete the mood history */
-                alertDialogDeleteHistory();
+                if (!returnTrueIfThereIsStateDataInDaysTable()){
+                    Toast.makeText(MoodHistory.this,
+                            R.string.data_already_deleted,
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+                else {
+                    /** Button used to delete the mood history */
+                    alertDialogDeleteHistory();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -166,7 +175,7 @@ public class MoodHistory extends AppCompatActivity {
      * (all state_id in all rows = 6, which means "no mood")
      * It's used to prevent the user from going to the Pie Chart Activity
      * if there is no data in the table */
-    public boolean returnTrueIfThereIsStateDataInDaysTable (Cursor mCursor) {
+    public boolean returnTrueIfThereIsStateDataInDaysTable () {
 
         int counter = 0;
         mCursor.moveToFirst();

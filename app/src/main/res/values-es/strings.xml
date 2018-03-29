@@ -46,5 +46,6 @@
 
     <!-- MOOD HISTORY PIE CHART BUTTON -->
     <string name="no_data_no_pie_chart">No hay datos que mostrar</string>
+    <string name="data_already_deleted">El historial ya ha sido borrado</string>
 
 </resources>

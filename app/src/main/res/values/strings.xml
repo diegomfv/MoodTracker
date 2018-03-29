@@ -45,6 +45,10 @@
 
     <!-- MOOD HISTORY PIE CHART BUTTON -->
     <string name="no_data_no_pie_chart">There is no data to show in a Pie Chart</string>
+    <string name="data_already_deleted">Data has been already deleted</string>
+
+    <!-- MOOD HISTORY BACK BUTTON -->
+    <string name="go_back_main_activity">Go back to Main Activity</string>
 
 
 
