@@ -28,7 +28,6 @@ import static org.junit.Assert.*;
  */
 public class DisappointedSmileyTest {
 
-
     @Rule
     public ActivityTestRule<DisappointedSmiley> disappointedSmileyActivityTestRule =
             new ActivityTestRule<DisappointedSmiley>(DisappointedSmiley.class);
@@ -133,7 +132,6 @@ public class DisappointedSmileyTest {
 
     @After
     public void tearDown() throws Exception {
-
 
         mActivity = null;
 

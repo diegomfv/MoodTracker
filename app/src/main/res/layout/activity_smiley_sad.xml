@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/faded_red"
-    tools:context="com.example.android.moodtracker.MainActivity">
+    tools:context="com.example.android.moodtracker.activitiesmoodstate.MainActivity">
 
     <ImageButton
         android:id="@+id/sad_face_button"
