@@ -34,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    /** TBALE CREATION STATEMENTS. We use them
+    /** TABLE CREATION STATEMENTS. We use them
      *  to create the database*/
     private static final String CREATE_DAYS_TABLE =
             "CREATE TABLE " + DatabaseContract.Database.DAYS_TABLE_NAME

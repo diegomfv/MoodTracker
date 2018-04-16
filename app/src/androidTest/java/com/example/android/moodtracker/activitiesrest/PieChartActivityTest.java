@@ -60,7 +60,7 @@ public class PieChartActivityTest {
     }
 
     @Test
-    public void testCheckThatPieChartMoves () {
+    public void testCheckThatPieCanMoveWhenSwipe () {
 
         onView(withId(R.id.pie_chart)).perform(swipeRight()).check(matches(isDisplayed()));
 

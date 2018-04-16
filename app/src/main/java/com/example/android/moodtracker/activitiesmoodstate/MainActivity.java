@@ -1,6 +1,7 @@
 package com.example.android.moodtracker.activitiesmoodstate;
 
 import android.animation.Animator;
+import android.app.ActionBar;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -61,11 +63,14 @@ public class MainActivity extends AppCompatActivity
             for (int i = 0; i < DatabaseValues.days.length; i++){
                 dbH.insertFirstDataDays(DatabaseValues.days[i],6,"");
             }
+
+            /** We create the alarm for updating the mood history*/
+            createAlarm();
+
             Toast.makeText(MainActivity.this,
                     getResources().getString(R.string.toast_swipe_to_change),
                     Toast.LENGTH_LONG)
                     .show();
-            createAlarm();
         }
 
         if (dbH.isTableEmpty(DatabaseContract.Database.STATES_TABLE_NAME)) {
@@ -221,11 +226,10 @@ public class MainActivity extends AppCompatActivity
         // the Intent and PendingIntent necessary for the AlarmManager.setRepeating method.
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, BroadcastDataUpdate.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //timeInMillis: specifies when we have to start the alarm (calendar gives this information).
         //INTERVAL_DAY: makes the alarm be repeated every day.
-
         if (alarmManager != null) {
             alarmManager.setInexactRepeating(
                     AlarmManager.RTC_WAKEUP,
@@ -234,5 +238,4 @@ public class MainActivity extends AppCompatActivity
                     pendingIntent);
         }
     }
-
 }

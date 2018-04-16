@@ -2,12 +2,15 @@ package com.example.android.moodtracker.activitiesmoodstate;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.database.Cursor;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
 import com.example.android.moodtracker.R;
 import com.example.android.moodtracker.activitiesrest.MoodHistory;
+import com.example.android.moodtracker.database.DatabaseContract;
+import com.example.android.moodtracker.database.DatabaseHelper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -53,10 +56,19 @@ public class DisappointedSmileyTest {
                     null,
                     false);
 
+
+    DatabaseHelper dbH;
+    Cursor mCursor;
+
+
     @Before
     public void setUp() throws Exception {
 
+        /** With this, we get the context! */
         mActivity = disappointedSmileyActivityTestRule.getActivity();
+
+        dbH = new DatabaseHelper(mActivity);
+        mCursor = dbH.getAllDataFromDaysTable();
 
     }
 
@@ -133,15 +145,25 @@ public class DisappointedSmileyTest {
     @Test
     public void testThatClickingTheFaceButtonUpdatesTheDatabase () {
 
-        assertTrue(mActivity.dbH.updateDataDaysStateInToday(2));
+        dbH.updateDataDaysStateInToday(6);
+        mCursor.moveToFirst();
+        assertTrue(mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID)) == 6);
+
+        onView(withId(R.id.disappointed_face_button)).perform(click());
+        assertTrue(mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID)) == 2);
 
     }
 
     @After
     public void tearDown() throws Exception {
 
-        mActivity = null;
+        dbH.updateDataDaysStateInToday(6);
 
+        dbH = null;
+        mCursor = null;
+
+        /** With this, we nullify the activity (that was launched) */
+        mActivity = null;
     }
 
 }
