@@ -119,14 +119,14 @@ public class MoodHistory extends AppCompatActivity {
 
             case R.id.delete_comment_history:
 
-                if (!returnTrueIfThereIsStateDataInDaysTable()){
+                if (!returnTrueIfThereIsStateDataInDaysTable() && !returnTrueIfThereIsCommentDataInDaysTable()){
                     Toast.makeText(MoodHistory.this,
                             R.string.data_already_deleted,
                             Toast.LENGTH_SHORT)
                             .show();
                 }
                 else {
-                    /** Button used to delete the mood history */
+                    /** Dialog used to delete the mood history */
                     alertDialogDeleteHistory();
                 }
                 break;
@@ -190,8 +190,29 @@ public class MoodHistory extends AppCompatActivity {
         }
 
         //If counter is equal to the number of rows, then it means that all are 6,
-        //which means there is no information in the database
+        //which means there is no state information in the database
         if (counter != mCursor.getCount())return true;
+        else return false;
+
+    }
+
+    public boolean returnTrueIfThereIsCommentDataInDaysTable () {
+
+        int counter = 0;
+        mCursor.moveToFirst();
+
+        for (int i = 0; i < mCursor.getCount() ; i++) {
+            if (mCursor.getString(mCursor.getColumnIndex(DatabaseContract.Database.COMMENT)).equals("")){
+                counter++;
+                if (i != mCursor.getCount()-1) {
+                    mCursor.moveToNext();
+                }
+            }
+        }
+
+        //If counter is equal to the number of rows, then it means that there are no comments,
+        //which means there is no comment information in the database
+        if (counter != mCursor.getCount()) return true;
         else return false;
 
     }
