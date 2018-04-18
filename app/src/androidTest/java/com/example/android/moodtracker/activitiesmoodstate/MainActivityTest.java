@@ -63,7 +63,6 @@ public class MainActivityTest {
     DatabaseHelper dbH;
     Cursor mCursor;
 
-
     @Before
     public void setUp() throws Exception {
 
@@ -181,12 +180,15 @@ public class MainActivityTest {
     @Test
     public void testThatClickingTheFaceButtonUpdatesTheDatabase (){
 
-        dbH.updateDataDaysStateInToday(6);
-        mCursor.moveToFirst();
-        assertTrue(mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID)) == 6);
+        DatabaseHelper dbH = new DatabaseHelper(mActivity);
+        Cursor mCursor = dbH.getAllDataFromDaysTable();
 
         onView(withId(R.id.happy_face_button)).perform(click());
-        assertTrue(mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID)) == 5);
+
+        mCursor.moveToFirst();
+        int state = mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID));
+
+        assertTrue(state == 4);
 
     }
 
@@ -201,6 +203,8 @@ public class MainActivityTest {
 
         /** With this, we nullify the activity (that was launched) */
         mActivity = null;
+
+
 
     }
 

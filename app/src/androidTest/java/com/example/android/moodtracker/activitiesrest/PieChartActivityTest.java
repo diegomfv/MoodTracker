@@ -3,7 +3,6 @@ package com.example.android.moodtracker.activitiesrest;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.support.test.rule.ActivityTestRule;
-import android.util.Log;
 
 import com.example.android.moodtracker.R;
 

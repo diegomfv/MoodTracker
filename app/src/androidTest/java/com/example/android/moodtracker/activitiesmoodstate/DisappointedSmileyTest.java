@@ -143,14 +143,17 @@ public class DisappointedSmileyTest {
     }
 
     @Test
-    public void testThatClickingTheFaceButtonUpdatesTheDatabase () {
+    public void testThatClickingTheFaceButtonUpdatesTheDatabase (){
 
-        dbH.updateDataDaysStateInToday(6);
-        mCursor.moveToFirst();
-        assertTrue(mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID)) == 6);
+        DatabaseHelper dbH = new DatabaseHelper(mActivity);
+        Cursor mCursor = dbH.getAllDataFromDaysTable();
 
         onView(withId(R.id.disappointed_face_button)).perform(click());
-        assertTrue(mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID)) == 2);
+
+        mCursor.moveToFirst();
+        int state = mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID));
+
+        assertTrue(state == 2);
 
     }
 
