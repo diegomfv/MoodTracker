@@ -51,8 +51,6 @@ public class PieChartActivity extends AppCompatActivity{
     private DatabaseHelper dbH;
     private Cursor mCursor;
 
-    private Button button;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
