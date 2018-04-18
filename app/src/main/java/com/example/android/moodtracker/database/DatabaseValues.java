@@ -45,7 +45,7 @@ public class DatabaseValues {
             "Normal", //3
             "Happy", //4
             "Super Happy", //5
-            "Nothing yet" //6
+            "Nothing yet" //6S
     };
 
 }

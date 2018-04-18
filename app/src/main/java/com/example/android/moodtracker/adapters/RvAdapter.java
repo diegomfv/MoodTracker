@@ -53,7 +53,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
     /** Manipulation of each view in each viewHolder
      *  */
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) { //bind == encuadernar
+    public void onBindViewHolder(MyViewHolder holder, int position) {
 
         Log.d(TAG, "#" + position);
 
@@ -61,7 +61,6 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
             return;
 
         //SETTING THE BACKGROUND OF VIEW HOLDER
-
         int state = mCursor.getInt(mCursor.getColumnIndex(DatabaseContract.Database.STATE_ID));
         int color;
         LinearLayout.LayoutParams paramsLeft = new LinearLayout.LayoutParams(0,
