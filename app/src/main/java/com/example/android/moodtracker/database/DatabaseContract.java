@@ -24,7 +24,7 @@ public class DatabaseContract {
         public static final String DAYS_TABLE_NAME = "days_table";
         public static final String STATES_TABLE_NAME = "states_table";
 
-        //SHARED COLUMNS, name of columns
+        //SHARED COLUMNS, name of COLUMNS
         public static final String STATE_ID = "state_id";
 
         //DAYS TABLE, name of COLUMNS
