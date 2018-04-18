@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /** When back button is pressed, there is a fade effect while returning to the
-     * previous actitivity
+     * previous activity
      * */
     @Override
     public void onBackPressed() {
