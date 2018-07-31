@@ -4,7 +4,15 @@ MoodTracker is a simple app that allows you to record your mood within the appli
 
 Your mood history is saved for a week, allowing you to see your general mood trends. Any comment you've left can also be consulted. Additionally, you can see your mood history in a pie chart.
 
-## Libraries Used
+## Screenshots
+
+<img src="./screenshots/happy.png" width="30%" height="30%">&ensp;<img src="./screenshots/superhappy.png" width="30%" height="30%">&ensp;<img src="./screenshots/normal.png" width="30%" height="30%">
+
+<img src="./screenshots/disappointed.png" width="30%" height="30%">&ensp;<img src="./screenshots/sad.png" width="30%" height="30%">
+
+<img src="./screenshots/bars.png" width="30%" height="30%">&ensp;<img src="./screenshots/dialog.png" width="30%" height="30%">&ensp;<img src="./screenshots/piechart.png" width="30%" height="30%">
+
+## Libraries
 
 * [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
 * [MP Android Chart](https://github.com/PhilJay/MPAndroidChart)
