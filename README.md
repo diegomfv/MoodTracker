@@ -1,6 +1,6 @@
 # MoodTracker
 
-Note: This project is outdated. Please, check MoodTracker V2.
+**Note: This project is outdated. Please, check MoodTracker V2.**
 
 MoodTracker is a simple app that allows you to record your mood within the application on a daily basis. If you want, you can add a note to give more information on why you're feeling a certain way (ex. "I got a new job! 😃" or "There was no cheesecake left for dessert 😞 "). 
 
